@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.concert-item {
+  border: 1px solid #ccc;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.concert-item summary {
+  cursor: pointer;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.concert-item img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+}
+
+.concert-item p {
+  margin: 5px 0;
+}
+
+.concert-item a {
+  color: #0066cc;
+  text-decoration: none;
+  font-weight: bold;
+}
