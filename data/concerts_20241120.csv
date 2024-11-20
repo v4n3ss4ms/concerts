@@ -157,7 +157,7 @@ id,artist_name,event_type,event_name,date,venue,city,country,img_1,img_2,img_3,l
 1156,Ska-P,concert,,10/06/2023,Stadtpark,Hamburg,Germany,skap_talco_2023.jpg,,,,
 1157,Talco,concert,,10/06/2023,Stadtpark,Hamburg,Germany,skap_talco_2023.jpg,,,,
 1158,Rammstein,festival,Sonisphere 2010,10/07/2010,Getafe Open Air,Getafe,Spain,sonisphere_cartel_2010.jpg,,,https://es.wikipedia.org/wiki/Festival_Sonisphere#Espa%C3%B1a_2,
-1159,Sum 41,concert,,27/09/2022,Wizink Center (Palacio de los Deportes),Madrid,Spain,sum41_2023.jpg,,,,
+1159,Sum 41,concert,,27/09/2022,Wizink Center (Palacio de los Deportes),Madrid,Spain,sum41_2022.jpg,,,,
 1160,The Prodigy,festival,Tsunami Xixón,03/08/2018,La Laboral,Gijón,Spain,tsunami_cartel_2018.jpg,,,https://www.tsunamixixon.com/ediciones-anteriores/,
 1161,Gogol Bordello,festival,Tsunami Xixón,03/08/2018,La Laboral,Gijón,Spain,tsunami_cartel_2018.jpg,,,https://www.tsunamixixon.com/ediciones-anteriores/,
 1162,Bad Religion,festival,Tsunami Xixón,04/08/2018,La Laboral,Gijón,Spain,tsunami_cartel_2018.jpg,,,https://www.tsunamixixon.com/ediciones-anteriores/,
@@ -202,3 +202,4 @@ id,artist_name,event_type,event_name,date,venue,city,country,img_1,img_2,img_3,l
 1201,Su Ta Gar,festival,Viña Rock 2005,30/04/2005,Auditorio Municipal,Villarrobledo,Spain,vinarock_cartel_2005.jpg,vinarock_2005.jpg,,,
 1202,Non Servium,festival,Pirata Madrid 2024,05/10/2024,Auditorio Miguel Ríos,Rivas Vaciamadrid,Spain,piratamadrid_cartel_2024.jpeg,,,,
 1203,Lendakaris Muertos,festival,Pirata Madrid 2024,05/10/2024,Auditorio Miguel Ríos,Rivas Vaciamadrid,Spain,piratamadrid_cartel_2024.jpeg,,,,
+1204,Sum 41,concert,Tour of the setting Sum (Final european tour),19/11/2024,Wizink Center (Palacio de los Deportes),Madrid,Spain,sum41_2024.png,,,,
