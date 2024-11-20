@@ -1,34 +1,109 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
+
+/* COLORS */
+:root {
+  --black2: #1e1e1e;
+  --white: #ffffff;
+  --blue: #4983cf;
+  --pink: #be5064;
+}
+
+/* RESET */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
+  background-color: var(--white);
+  color: var(--black2);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
 }
 
 .concert-item {
+  text-align: center;
   border: 1px solid #ccc;
-  margin: 10px 0;
   padding: 10px;
-  border-radius: 5px;
-}
-
-.concert-item summary {
-  cursor: pointer;
-  font-size: 1.2em;
-  margin-bottom: 10px;
 }
 
 .concert-item img {
   max-width: 100%;
   height: auto;
-  margin-top: 10px;
 }
 
-.concert-item p {
-  margin: 5px 0;
+/* MODAL */
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.concert-item a {
-  color: #0066cc;
-  text-decoration: none;
-  font-weight: bold;
+.modal[hidden] {
+  display: none;
+}
+
+.modal__overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(30, 30, 30, 0.8); /* $black2 */
+  z-index: 11;
+}
+
+.modal__close {
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  font-size: 24px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+}
+
+.modal__close > i {
+  font-size: 34px;
+  color: var(--pink);
+}
+
+.modal__content {
+  background-color: var(--white);
+  color: var(--black2);
+  max-width: 600px;
+  width: 100%;
+  padding: 30px;
+  border-radius: 8px;
+  z-index: 22;
+  position: relative;
+}
+
+.modal__content > h4 {
+  font-size: 18px;
+  margin: 30px 0;
+}
+
+.modal__content > p {
+  margin-bottom: 20px;
+}
+
+.modal__action {
+  text-align: right;
 }

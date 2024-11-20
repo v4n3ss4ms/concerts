@@ -21,7 +21,7 @@ function parseDate(dateString) {
 }
 
 function getData() {
-  fetch('./data/concerts_20241023.csv')
+  fetch('./data/concerts_20241120.csv')
     .then(response => response.text())
     .then(csv => {
       concertsData = csvToJson(csv);
@@ -29,7 +29,8 @@ function getData() {
         concert.date = parseDate(concert.date);
       });
       sortData('artist_name', 'asc');
-      renderConcerts(concertsData);
+      //renderConcerts(concertsData);
+      renderConcertGrid(concertsData);
       document.getElementById('sort-select').disabled = false;
       document.getElementById('order-select').disabled = false;
     })
@@ -91,7 +92,8 @@ function sortData(key, order) {
     }
   });
 
-  renderConcerts(concertsData);
+  //renderConcerts(concertsData);
+  renderConcertGrid(concertsData);
 }
 
 getData();
@@ -111,3 +113,91 @@ document.getElementById('order-select').addEventListener('change', () => {
     sortData(sortKey, order);
   }
 });
+
+
+function renderConcertGrid(concerts) {
+  const concertGrid = document.getElementById('concert-grid');
+  concertGrid.innerHTML = '';
+
+  concerts.forEach(concert => {
+    const {
+      artist_name,
+      event_type,
+      event_name,
+      date,
+      img_1,
+      img_2,
+      img_3,
+    } = concert;
+
+
+
+    const concertItem = document.createElement('div');
+    concertItem.classList.add('concert-item');
+    concertItem.setAttribute('tabindex', '0');
+
+    concertItem.innerHTML = `
+      ${img_1 ? `<img src="imgs/${img_1}" alt="${artist_name}">` : ''}
+      <h3>${artist_name}</h3>
+      <p>${event_name ? event_name : ''}</p>
+      <p>${date ? date.toLocaleDateString() : 'No date available'}</p>
+    `;
+
+    concertItem.addEventListener('click', () => openModal(concert));
+    concertItem.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') openModal(concert);
+    });
+
+    concertGrid.appendChild(concertItem);
+  });
+}
+
+function openModal(concert) {
+  const modal = document.querySelector('.js-modal');
+  const closeModalBtn = document.querySelector('.js-close-modal');
+  modal.hidden = false;
+  closeModalBtn.addEventListener('click', () => closeModal(modal));
+}
+
+function closeModal(modal) {
+  modal.hidden = open;
+}
+
+/*function openModal(concert) {
+  const modal = document.getElementById('concert-modal');
+  const {
+    artist_name,
+    event_name,
+    date,
+    venue,
+    city,
+    country,
+    img_1,
+    img_2,
+    img_3,
+    description,
+    link
+  } = concert;
+
+  document.getElementById('modal-title').textContent = artist_name + (event_name ? ` - ${event_name}` : '');
+  //document.getElementById('modal-image').src = `imgs/${img_1}`;
+  document.getElementById('modal-date').textContent = `Fecha: ${date ? date.toLocaleDateString() : 'No date available'}`;
+  document.getElementById('modal-venue').textContent = `Lugar: ${venue}, ${city}, ${country}`;
+  document.getElementById('modal-description').textContent = description || 'No description available';
+  const modalLink = document.getElementById('modal-link');
+  modalLink.href = link || '#';
+  modalLink.style.display = link ? 'inline' : 'none';
+
+  modal.hidden = false;
+  modal.querySelector('.close-btn').focus();
+}
+
+document.getElementById('close-modal').addEventListener('click', closeModal);
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
+
+function closeModal() {
+  const modal = document.getElementById('concert-modal');
+  modal.hidden = true;
+}*/
