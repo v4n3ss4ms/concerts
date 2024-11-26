@@ -26,20 +26,33 @@ body {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
+  justify-items: center;
 }
 
 .concert-item {
+  width: 250px;
+  height: 350px;
   text-align: center;
   border: 1px solid #ccc;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  margin: 0 auto;
+  border-radius: 8px;
 }
 
 .concert-item img {
-  max-width: 100%;
-  height: auto;
+  width: 100%;
+  height: 80%;
+  object-fit: cover;
+  object-position: top left;
+  border-radius: 8px;
 }
+
 
 /* MODAL */
 .modal {
@@ -106,4 +119,8 @@ body {
 
 .modal__action {
   text-align: right;
+}
+
+.btn:focus {
+  outline: 2px solid var(--blue);
 }

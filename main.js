@@ -1,4 +1,5 @@
 let concertsData = [];
+let previouslyFocused = null;
 
 function csvToJson(csv) {
   const lines = csv.split('\n');
@@ -119,7 +120,7 @@ function renderConcertGrid(concerts) {
   const concertGrid = document.getElementById('concert-grid');
   concertGrid.innerHTML = '';
 
-  concerts.forEach(concert => {
+  concerts.forEach((concert, idx) => {
     const {
       artist_name,
       event_type,
@@ -129,8 +130,6 @@ function renderConcertGrid(concerts) {
       img_2,
       img_3,
     } = concert;
-
-
 
     const concertItem = document.createElement('div');
     concertItem.classList.add('concert-item');
@@ -154,50 +153,37 @@ function renderConcertGrid(concerts) {
 
 function openModal(concert) {
   const modal = document.querySelector('.js-modal');
+
+  modal.hidden = false;
+  previouslyFocused = document.activeElement;
+  modal.querySelector('.modal__content').focus();
+  createCloseModalListener();
+}
+
+function createCloseModalListener() {
   const closeModalBtn = document.querySelector('.js-close-modal');
-  modal.hidden = false;
-  closeModalBtn.addEventListener('click', () => closeModal(modal));
+  document.addEventListener('keydown', handleEscape);
+  closeModalBtn.addEventListener('click', closeModal);
 }
 
-function closeModal(modal) {
-  modal.hidden = open;
+function removeCloseModalListener() {
+  const closeModalBtn = document.querySelector('.js-close-modal');
+  document.removeEventListener('keydown', handleEscape);
+  closeModalBtn.removeEventListener('click', closeModal);
 }
-
-/*function openModal(concert) {
-  const modal = document.getElementById('concert-modal');
-  const {
-    artist_name,
-    event_name,
-    date,
-    venue,
-    city,
-    country,
-    img_1,
-    img_2,
-    img_3,
-    description,
-    link
-  } = concert;
-
-  document.getElementById('modal-title').textContent = artist_name + (event_name ? ` - ${event_name}` : '');
-  //document.getElementById('modal-image').src = `imgs/${img_1}`;
-  document.getElementById('modal-date').textContent = `Fecha: ${date ? date.toLocaleDateString() : 'No date available'}`;
-  document.getElementById('modal-venue').textContent = `Lugar: ${venue}, ${city}, ${country}`;
-  document.getElementById('modal-description').textContent = description || 'No description available';
-  const modalLink = document.getElementById('modal-link');
-  modalLink.href = link || '#';
-  modalLink.style.display = link ? 'inline' : 'none';
-
-  modal.hidden = false;
-  modal.querySelector('.close-btn').focus();
-}
-
-document.getElementById('close-modal').addEventListener('click', closeModal);
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeModal();
-});
 
 function closeModal() {
-  const modal = document.getElementById('concert-modal');
+  const modal = document.querySelector('.js-modal');
   modal.hidden = true;
-}*/
+
+  if (previouslyFocused) {
+    previouslyFocused.focus();
+  }
+  removeCloseModalListener();
+}
+
+function handleEscape(event) {
+  if (event.key === 'Escape') {
+    closeModal();
+  }
+}

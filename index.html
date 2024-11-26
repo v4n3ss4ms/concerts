@@ -38,6 +38,7 @@
       <option value="date">Fecha</option>
     </select>
 
+    <label for="order-select">Order:</label>
     <select id="order-select" disabled>
       <option value="asc">asc</option>
       <option value="desc">desc</option>
@@ -46,10 +47,10 @@
   </section>
 
 
-  <div class="modal js-modal" hidden>
+  <div class="modal js-modal" hidden role="dialog" aria-labelledby="modal-title" aria-hidden="true">
     <div class="modal__overlay"></div>
-    <div class="modal__content">
-      <h4>Lorem ipsum dolor sit amet consectetur adipisicing!</h4>
+    <div class="modal__content" tabindex="-1">
+      <h4 id="modal-title">Lorem ipsum dolor sit amet consectetur adipisicing!</h4>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo hic
         earum possimus itaque, aperiam tenetur quo ducimus doloremque maxime
@@ -59,7 +60,7 @@
         similique quas, ducimus ad?
       </p>
       <div class="modal__action">
-        <button class="btn js-close-modal">Close</button>
+        <button class="btn js-close-modal" aria-label="Close modal">Close</button>
       </div>
     </div>
   </div>
