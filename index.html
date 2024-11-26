@@ -32,17 +32,23 @@
 <main>
   <h1>Concerts list</h1>
   <section>
-    <label for="sort-select">Order by:</label>
+    <label for="sort-select">Show all artist ordered by:</label>
     <select id="sort-select" disabled>
       <option value="artist_name">Artista</option>
       <option value="date">Fecha</option>
     </select>
 
-    <label for="order-select">Order:</label>
+    <label for="order-select">and:</label>
     <select id="order-select" disabled>
       <option value="asc">asc</option>
       <option value="desc">desc</option>
     </select>
+
+    <label for="artist-select">Show only this artist:</label>
+    <select id="artist-select" disabled>
+      <option value="all">All</option>
+    </select>
+
     <div id="concert-grid" class="grid"></div>
   </section>
 

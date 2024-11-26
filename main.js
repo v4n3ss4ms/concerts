@@ -30,13 +30,16 @@ function getData() {
         concert.date = parseDate(concert.date);
       });
       sortData('artist_name', 'asc');
-      //renderConcerts(concertsData);
-      renderConcertGrid(concertsData);
+
+      renderConcertsGrid(concertsData);
       document.getElementById('sort-select').disabled = false;
       document.getElementById('order-select').disabled = false;
+      populateArtistSelect();
     })
     .catch(error => console.error('Error loading CSV:', error));
 }
+
+getData();
 
 function renderConcerts(concerts) {
   const eventList = document.getElementById('concert-list');
@@ -92,31 +95,37 @@ function sortData(key, order) {
       return order === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
     }
   });
-
-  //renderConcerts(concertsData);
-  renderConcertGrid(concertsData);
+  renderConcertsGrid(concertsData);
 }
 
-getData();
+document.getElementById('sort-select').addEventListener('change', sortDataBy);
+document.getElementById('order-select').addEventListener('change',sortDataBy);
 
-document.getElementById('sort-select').addEventListener('change', () => {
+function sortDataBy() {
   const sortKey = document.getElementById('sort-select').value;
   const order = document.getElementById('order-select').value;
+  resetAll();
+
   if (sortKey && order) {
     sortData(sortKey, order);
   }
-});
+}
 
-document.getElementById('order-select').addEventListener('change', () => {
-  const sortKey = document.getElementById('sort-select').value;
-  const order = document.getElementById('order-select').value;
-  if (sortKey && order) {
-    sortData(sortKey, order);
+document.getElementById('artist-select').addEventListener('change', () => {
+  const selectedArtist = document.getElementById('artist-select').value;
+  if (selectedArtist === 'all') {
+    renderConcertsGrid(concertsData);
+  } else {
+    const filteredConcerts = concertsData.filter(concert => concert.artist_name === selectedArtist);
+    renderConcertsGrid(filteredConcerts);
   }
 });
 
+function resetAll() {
+  document.getElementById('artist-select').value = 'all';
+}
 
-function renderConcertGrid(concerts) {
+function renderConcertsGrid(concerts) {
   const concertGrid = document.getElementById('concert-grid');
   concertGrid.innerHTML = '';
 
@@ -150,6 +159,24 @@ function renderConcertGrid(concerts) {
     concertGrid.appendChild(concertItem);
   });
 }
+
+function populateArtistSelect() {
+  const artistSelect = document.getElementById('artist-select');
+  const artists = [...new Set(concertsData.map(concert => concert.artist_name))];
+
+  artists.sort((a, b) => a.localeCompare(b));
+  artistSelect.innerHTML = '<option value="all">All</option>';
+  artists.forEach(artist => {
+    const option = document.createElement('option');
+    option.value = artist;
+    option.textContent = artist;
+    artistSelect.appendChild(option);
+  });
+  artistSelect.disabled = false;
+}
+
+
+// Modal
 
 function openModal(concert) {
   const modal = document.querySelector('.js-modal');
