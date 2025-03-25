@@ -22,7 +22,7 @@ function parseDate(dateString) {
 }
 
 function getData() {
-  fetch('./data/concerts_20250208.csv')
+  fetch('./data/concerts_20250324.csv')
     .then(response => response.text())
     .then(csv => {
       concertsData = csvToJson(csv);
