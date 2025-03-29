@@ -29,48 +29,56 @@
 </head>
 <body>
 
-<main>
+<header>
   <h1>Concerts list</h1>
-  <section>
-    <label for="sort-select">Show all artist ordered by:</label>
-    <select id="sort-select" disabled>
-      <option value="artist_name">Artista</option>
-      <option value="date">Fecha</option>
-    </select>
+  <section class="controls">
+    <div class="filter-container">
+      <label for="sort-select">Show all artist ordered by:</label>
+      <select id="sort-select" disabled>
+        <option value="artist_name">Artista</option>
+        <option value="date">Fecha</option>
+      </select>
 
-    <label for="order-select">and:</label>
-    <select id="order-select" disabled>
-      <option value="asc">asc</option>
-      <option value="desc">desc</option>
-    </select>
+      <label for="order-select">and:</label>
+      <select id="order-select" disabled>
+        <option value="asc">asc</option>
+        <option value="desc">desc</option>
+      </select>
+    </div>
 
-    <label for="artist-select">Show only this artist:</label>
-    <select id="artist-select" disabled>
-      <option value="all">All</option>
-    </select>
-
-    <div id="concert-grid" class="grid"></div>
+    <div class="filter-container">
+      <label for="artist-select">Show only this artist:</label>
+      <select id="artist-select" disabled>
+        <option value="all">All</option>
+      </select>
+    </div>
   </section>
+</header>
+<main>
+  <div id="concert-grid" class="concert-grid"></div>
+</main>
 
 
-  <div class="modal js-modal" hidden role="dialog" aria-labelledby="modal-title" aria-hidden="true">
-    <div class="modal__overlay"></div>
-    <div class="modal__content" tabindex="-1">
-      <h4 id="modal-title">Lorem ipsum dolor sit amet consectetur adipisicing!</h4>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo hic
-        earum possimus itaque, aperiam tenetur quo ducimus doloremque maxime
-        voluptas natus laudantium nemo maiores ex ipsam quis. Nobis atque
-        incidunt esse architecto cupiditate quis neque ipsa animi deserunt
-        commodi perspiciatis aperiam nemo dignissimos libero, fugit dolorum
-        similique quas, ducimus ad?
-      </p>
-      <div class="modal__action">
-        <button class="btn js-close-modal" aria-label="Close modal">Close</button>
+<div class="modal js-modal" hidden role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+  <div class="modal__overlay"></div>
+  <div class="modal__content" tabindex="-1">
+    <button class="modal__close js-close-modal" aria-label="Close modal">&times;</button>
+    <div class="modal__body">
+      <div class="carousel">
+        <button class="carousel__prev" aria-label="Previous image">&lt;</button>
+        <div class="carousel__container"></div>
+        <button class="carousel__next" aria-label="Next image">&gt;</button>
+      </div>
+      <div class="concert-details">
+        <h2></h2>
+        <p class="date"></p>
+        <p class="venue"></p>
+        <p class="location"></p>
+        <a class="event-link" href="" target="_blank" rel="noopener noreferrer">Event Link</a>
       </div>
     </div>
   </div>
-</main>
+</div>
 
 
 <script src="main.js" defer></script>

@@ -39,8 +39,6 @@ function getData() {
     .catch(error => console.error('Error loading CSV:', error));
 }
 
-getData();
-
 function renderConcerts(concerts) {
   const eventList = document.getElementById('concert-list');
   eventList.innerHTML = '';
@@ -177,10 +175,52 @@ function populateArtistSelect() {
 
 
 // Modal
-
 function openModal(concert) {
   const modal = document.querySelector('.js-modal');
+  const modalTitle = modal.querySelector('h2');
+  const modalDate = modal.querySelector('.date');
+  const modalVenue = modal.querySelector('.venue');
+  const modalLocation = modal.querySelector('.location');
+  const modalLink = modal.querySelector('.event-link');
+  const carouselContainer = modal.querySelector('.carousel__container');
 
+  modalTitle.textContent = concert.artist_name;
+  modalDate.textContent = concert.date ? concert.date.toLocaleDateString() : 'No date available';
+  modalVenue.textContent = concert.venue || 'Venue not available';
+  modalLocation.textContent = `${concert.city}, ${concert.country}`;
+
+  if (concert.link) {
+    modalLink.href = concert.link;
+    modalLink.style.display = 'inline-block';
+  } else {
+    modalLink.style.display = 'none';
+  }
+
+  // Setup carousel
+  const images = [concert.img_1, concert.img_2, concert.img_3].filter(Boolean);
+  let currentImageIndex = 0;
+
+  const updateCarousel = () => {
+    carouselContainer.innerHTML = `<img src="imgs/${images[currentImageIndex]}" alt="${concert.artist_name}">`;
+  };
+
+  const prevButton = modal.querySelector('.carousel__prev');
+  const nextButton = modal.querySelector('.carousel__next');
+
+  prevButton.style.display = images.length > 1 ? 'block' : 'none';
+  nextButton.style.display = images.length > 1 ? 'block' : 'none';
+
+  prevButton.onclick = () => {
+    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+    updateCarousel();
+  };
+
+  nextButton.onclick = () => {
+    currentImageIndex = (currentImageIndex + 1) % images.length;
+    updateCarousel();
+  };
+
+  updateCarousel();
   modal.hidden = false;
   previouslyFocused = document.activeElement;
   modal.querySelector('.modal__content').focus();
@@ -214,3 +254,8 @@ function handleEscape(event) {
     closeModal();
   }
 }
+
+// Initialize the application
+document.addEventListener('DOMContentLoaded', () => {
+  getData();
+});

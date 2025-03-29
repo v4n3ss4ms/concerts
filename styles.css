@@ -1,12 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
-
-/* COLORS */
 :root {
-  --black2: #1e1e1e;
-  --white: #ffffff;
-  --blue: #4983cf;
-  --pink: #be5064;
+  --bg-color: #000000;
+  --text-color: #ffffff;
+  --accent-color: #ff0000;
+  --secondary-color: #1a1a1a;
+  --hover-color: #ff3333;
 }
 
 /* RESET */
@@ -19,108 +16,269 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
-  background-color: var(--white);
-  color: var(--black2);
+  font-family: 'Courier New', monospace;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.4;
 }
 
-.grid {
+header {
+  padding: 2rem;
+  background-color: var(--text-color);
+  color: var(--bg-color);
+  border-bottom: 5px solid var(--accent-color);
+}
+
+h1 {
+  text-align: left;
+  margin-bottom: 2rem;
+  font-size: 4rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+}
+
+.controls {
+  max-width: 1400px;
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  justify-items: center;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.filter-container, .sort-container {
+  width: 100%;
+}
+
+label {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: var(--bg-color);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+select {
+  width: 100%;
+  padding: 1rem;
+  border: 3px solid var(--bg-color);
+  background-color: var(--text-color);
+  color: var(--bg-color);
+  font-family: 'Courier New', monospace;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+select:focus {
+  outline: 3px solid var(--accent-color);
+  outline-offset: -3px;
+}
+
+main {
+  max-width: 1400px;
+  margin: 2rem auto 3rem;
+  padding: 0 2rem;
+}
+
+.concert-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
 }
 
 .concert-item {
-  width: 250px;
-  height: 350px;
-  text-align: center;
-  border: 1px solid #ccc;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  overflow: hidden;
-  margin: 0 auto;
-  border-radius: 8px;
+  background-color: var(--text-color);
+  cursor: pointer;
+  border: 5px solid var(--text-color);
+  transition: border-color 0.2s;
+  padding: 1rem;
+}
+
+.concert-item:hover {
+  border-color: var(--accent-color);
 }
 
 .concert-item img {
   width: 100%;
-  height: 80%;
+  aspect-ratio: 1/1;
   object-fit: cover;
-  object-position: top left;
-  border-radius: 8px;
+  filter: grayscale(100%);
+  margin-bottom: 1rem;
 }
 
+.concert-item:hover img {
+  filter: none;
+}
 
-/* MODAL */
+.concert-item h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--bg-color);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.concert-item p {
+  color: var(--bg-color);
+  font-size: 1rem;
+}
+
 .modal {
   position: fixed;
-  left: 0;
   top: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+}
+
+.modal__content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--bg-color);
+  padding: 2rem;
+  max-width: 95%;
+  width: 1000px;
+  border: 5px solid var(--text-color);
+}
+
+.modal__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--accent-color);
+  border: none;
+  color: var(--text-color);
+  font-size: 2rem;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.modal[hidden] {
-  display: none;
-}
-
-.modal__overlay {
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(30, 30, 30, 0.8); /* $black2 */
-  z-index: 11;
-}
-
-.modal__close {
-  border: 0;
-  outline: 0;
-  background-color: transparent;
-  font-size: 24px;
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  cursor: pointer;
-}
-
-.modal__close > i {
-  font-size: 34px;
-  color: var(--pink);
-}
-
-.modal__content {
-  background-color: var(--white);
-  color: var(--black2);
-  max-width: 600px;
-  width: 100%;
-  padding: 30px;
-  border-radius: 8px;
-  z-index: 22;
+.carousel {
   position: relative;
+  margin-bottom: 2rem;
+  border: 5px solid var(--text-color);
 }
 
-.modal__content > h4 {
-  font-size: 18px;
-  margin: 30px 0;
+.carousel__container {
+  aspect-ratio: 16/9;
+  background-color: var(--secondary-color);
+  overflow: hidden;
 }
 
-.modal__content > p {
-  margin-bottom: 20px;
+.carousel__container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.modal__action {
-  text-align: right;
+.carousel__prev,
+.carousel__next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--text-color);
+  color: var(--bg-color);
+  border: none;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
-.btn:focus {
-  outline: 2px solid var(--blue);
+.carousel__prev:hover,
+.carousel__next:hover {
+  background-color: var(--accent-color);
+  color: var(--text-color);
+}
+
+.carousel__prev {
+  left: 0;
+}
+
+.carousel__next {
+  right: 0;
+}
+
+.concert-details {
+  text-align: left;
+  margin-top: 2rem;
+}
+
+.concert-details h2 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.concert-details p {
+  margin-bottom: 1rem;
+  color: var(--text-color);
+  font-size: 1.2rem;
+}
+
+.concert-details .event-link {
+  color: var(--bg-color);
+  text-decoration: none;
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: var(--text-color);
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  border: none;
+}
+
+.concert-details .event-link:hover {
+  background-color: var(--accent-color);
+  color: var(--text-color);
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  .controls {
+    grid-template-columns: 1fr;
+  }
+
+  main {
+    padding: 0 1rem;
+  }
+
+  .concert-details h2 {
+    font-size: 2rem;
+  }
+}
+
+/* Accessibility */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 5px solid var(--accent-color);
+  outline-offset: 0;
 }
