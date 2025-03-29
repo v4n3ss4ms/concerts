@@ -21,6 +21,14 @@ function parseDate(dateString) {
   return null;
 }
 
+function initializeSelects() {
+  const sortSelect = document.getElementById('sort-select');
+  const orderSelect = document.getElementById('order-select');
+  sortSelect.value = 'date';
+  orderSelect.value = 'desc';
+  sortData('date', 'desc');
+}
+
 function getData() {
   fetch('./data/concerts_20250324.csv')
     .then(response => response.text())
@@ -29,8 +37,7 @@ function getData() {
       concertsData.forEach(concert => {
         concert.date = parseDate(concert.date);
       });
-      sortData('artist_name', 'asc');
-
+      initializeSelects();
       renderConcertsGrid(concertsData);
       document.getElementById('sort-select').disabled = false;
       document.getElementById('order-select').disabled = false;
