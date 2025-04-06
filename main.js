@@ -1,3 +1,5 @@
+const CSV_FILE = 'concerts_20250406.csv';
+
 let concertsData = [];
 let previouslyFocused = null;
 
@@ -30,7 +32,7 @@ function initializeSelects() {
 }
 
 function getData() {
-  fetch('./data/concerts_20250324.csv')
+  fetch(`./data/${CSV_FILE}`)
     .then(response => response.text())
     .then(csv => {
       concertsData = csvToJson(csv);
@@ -185,6 +187,7 @@ function populateArtistSelect() {
 function openModal(concert) {
   const modal = document.querySelector('.js-modal');
   const modalTitle = modal.querySelector('h2');
+  const modalEvent = modal.querySelector('h3');
   const modalDate = modal.querySelector('.date');
   const modalVenue = modal.querySelector('.venue');
   const modalLocation = modal.querySelector('.location');
@@ -192,8 +195,11 @@ function openModal(concert) {
   const carouselContainer = modal.querySelector('.carousel__container');
 
   modalTitle.textContent = concert.artist_name;
+  modalEvent.textContent = concert.event_name || '';
+  modalEvent.classList.toggle('hidden', concert.event_name === '');
   modalDate.textContent = concert.date ? concert.date.toLocaleDateString() : 'No date available';
-  modalVenue.textContent = concert.venue || 'Venue not available';
+  modalVenue.textContent = `${concert.venue},` || '';
+  modalVenue.classList.toggle('hidden', concert.venue === '');
   modalLocation.textContent = `${concert.city}, ${concert.country}`;
 
   if (concert.link) {
@@ -208,7 +214,11 @@ function openModal(concert) {
   let currentImageIndex = 0;
 
   const updateCarousel = () => {
-    carouselContainer.innerHTML = `<img src="imgs/${images[currentImageIndex]}" alt="${concert.artist_name}">`;
+    if (images.length === 0) {
+      carouselContainer.innerHTML = '<div class="carousel__no-image">image not available</div>';
+    } else {
+      carouselContainer.innerHTML = `<img src="imgs/${images[currentImageIndex]}" alt="${concert.artist_name}" onclick="window.open('imgs/${images[currentImageIndex]}', '_blank')">`;
+    }
   };
 
   const prevButton = modal.querySelector('.carousel__prev');
