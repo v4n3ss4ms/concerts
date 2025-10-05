@@ -157,7 +157,7 @@ function renderConcertsGrid(concerts) {
       ${img_1 ? `<img src="imgs/${img_1}" alt="${artist_name}">` : ''}
       <h3>${artist_name}</h3>
       <p>${event_name ? event_name : ''}</p>
-      <p>${date ? date.toLocaleDateString() : 'No date available'} - ${city}</p>
+      <p>${date ? date.toLocaleDateString() : 'No date available'}</p>
     `;
 
     concertItem.addEventListener('click', () => openModal(concert));
